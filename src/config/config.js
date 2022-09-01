@@ -1,3 +1,10 @@
+// module: config.js
+// author: Ben Riegel
+// overview: declares and exports the configuration data for the select menu
+
+
+//----- export code block ------------------------------------------------------
+
 export const optionsSchema = [
   {value:'option1', label:'Option 1'},
   {value:'option2', label:'Option 2'},

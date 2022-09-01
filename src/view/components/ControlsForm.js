@@ -1,10 +1,22 @@
+// module: ControlsForm.js
+// author: Ben Riegel
+// overview: declares and exports the ControlsForm component, which handles
+// user manipulation of the radio buttons responsible for enabling and disabling
+// the select menu.
+
+
+//----- export code block ------------------------------------------------------
 
 export default function ControlsForm(props){
+
+  //----- local functions -----
 
   function valueChangeHandler(evt){
     const isEnabled = (evt.target.value === 'Enabled');
     props.onValueChange(isEnabled);
   }
+
+  //----- render block -----
 
   return (
     <>

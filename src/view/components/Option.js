@@ -1,9 +1,8 @@
 // module: Option.js
 // author: Ben Riegel
 // overview: declares and exports the Option component class. This component
-// handles click events and adding/removing the click handler from the dom
-// when necessary. It also updates the selected class when the option is
-// selected by the user.
+// determines which state the options are in on each render and renders them
+// appropriately.
 
 
 //----- imports ----------------------------------------------------------------
@@ -16,6 +15,9 @@ import '../stylesheets/option.css';
 
 export default function Option(props){
 
+  //----- render block -----
+
+  //logic for determining the current state of the option
   function getState(){
     const { isSelected, selectIsOpen, isAnimating } = props;
     if (isSelected){
@@ -52,14 +54,12 @@ export default function Option(props){
   }
 
   function getClickListener(){
-    if (props.controlsEnabled && !props.animationInProgress){
+    if (props.controlsEnabled && !props.isAnimating){
       return handleClick;
     } else {
       return null;
     }
   }
-
-  //----- jsx block -----
 
   return (
     <div className={calcClassNames()}

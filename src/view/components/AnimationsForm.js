@@ -1,10 +1,22 @@
+// module: AnimationForm.js
+// author: Ben Riegel
+// overview: declares and exports the AnimationForm component, which handles
+// user manipulation of the radio buttons responsible for enabling and disabling
+// the select menu animations.
+
+
+//----- export code block ------------------------------------------------------
 
 export default function AnimationsForm(props){
+
+  //----- local functions -----
 
   function valueChangeHandler(evt){
     const isEnabled = (evt.target.value === 'Enabled');
     props.onValueChange(isEnabled);
   }
+
+  //----- render block -----
 
   return (
     <>

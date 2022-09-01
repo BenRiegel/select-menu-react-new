@@ -14,11 +14,19 @@ import '../stylesheets/output.css';
 
 export default function Output(props){
 
+  //----- state vars -----
+
   let content = useRef(null);
 
+  //----- effects -----
+
+  //makes sure that the output is scrolled in such a way that the content
+  //at the bottom is always visible
   useEffect( ()=>{
     content.current.scrollTop = content.current.scrollHeight;
   });
+
+  //----- render block -----
 
   return (
     <div className='output' ref={content}>
