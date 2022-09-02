@@ -10,16 +10,38 @@
 
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { stateReducer, updateReducer } from '../../state/state.js';
-import {  useOnAnimationStart, useOnAnimationEnd, useOnUpdateComplete } from '../../utils/utils.js';
 import Option from './Option.js';
 import '../stylesheets/select_menu.css';
 
 
 //----- export code block ------------------------------------------------------
 
-export default function SelectMenu(props){
+export default function Options(props){
 
   //----- local functions -----
+
+  function handleClick(evt){
+    let clickedOption = evt.target.dataset.value;
+    props.onClick(clickedOption);
+  }
+
+  function getClickListener(){
+    if (props.controlsEnabled && !props.isAnimating){
+      return handleClick;
+    } else {
+      return null;
+    }
+  }
+
+  function animationStartHandler(){
+
+  }
+
+  function animationEndHander(){
+
+  }
+
+
 
   //when an option has completed its animation, then we set the update as complete
   function completeUpdate(){
@@ -37,39 +59,7 @@ export default function SelectMenu(props){
 
   //----- state vars -----
 
-  const [state, initStateAction] = useReducer(stateReducer, {
-    options: props.initOptions,
-    selectedOption: props.initSelectedOption,
-    isOpen: props.initIsOpen,
-  });
-
-  const [update, initUpdateAction] = useReducer(updateReducer, {
-    type: null,
-    status: null
-  });
-
-  //for keeping track of previous selected option
-  const prevSelectedOption = useRef(null);
-
   //----- effects -----
-
-  //notifies when animation has started
-  useOnAnimationStart(update.status, ()=>{
-    props.onEvent('Animation starting . . .');
-  })
-
-  //notifies when animation has ended
-  useOnAnimationEnd(update, ()=>{
-    props.onEvent('Animation ended');
-  })
-
-  //if update is complete, then check for selected option change
-  useOnUpdateComplete(update, ()=>{
-    if (prevSelectedOption.current !== state.selectedOption){
-      props.onEvent('New selected value - ' + state.selectedOption);
-    }
-  });
-
   //----- render block -----
 
   const animationInProgress = (update.status === 'animating');
@@ -77,9 +67,11 @@ export default function SelectMenu(props){
   const closedClass = (isClosed ? 'closed' : '');
 
   return (
-    <div className={`select ${closedClass}`}>
+    <div onClick={getClickHandler}
+         onAnimationStart={animationStartHandler}
+         onAnimationEnd={animationEndHandler}>
       {
-        state.options.map( (option, index) => (
+        props.options.map( (option, index) => (
           <Option key={index}
                   value={option.value}
                   label={option.label}

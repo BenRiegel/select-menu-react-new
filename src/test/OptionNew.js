@@ -47,24 +47,9 @@ export default function Option(props){
     return classList.join(' ');
   }
 
-  function handleClick(evt){
-    let clickedOption = evt.target.dataset.value;
-    props.onClick(clickedOption);
-  }
-
-  function getClickListener(){
-    if (props.controlsEnabled && !props.isAnimating){
-      return handleClick;
-    } else {
-      return null;
-    }
-  }
-
   return (
     <div className={calcClassNames()}
-         data-value={props.value}
-         onClick={getClickListener()}
-         onAnimationEnd={props.onAnimationEnd}>
+         data-value={props.value}>
         {props.label}
     </div>
   );
