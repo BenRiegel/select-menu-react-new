@@ -12,8 +12,8 @@
 /build
 
 # misc
-/old
-/test
+/src/old
+/src/test
 .DS_Store
 .env.local
 .env.development.local

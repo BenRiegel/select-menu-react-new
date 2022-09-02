@@ -10,7 +10,7 @@
 
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { stateReducer, updateReducer } from '../../state/state.js';
-import {  useOnAnimationStart, useOnAnimationEnd, useOnUpdateComplete } from '../../utils/utils.js';
+import { useOnAnimationStart, useOnAnimationEnd, useOnUpdateComplete } from '../../utils/utils.js';
 import Option from './Option.js';
 import '../stylesheets/select_menu.css';
 
